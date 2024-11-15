@@ -9,5 +9,6 @@ data class Match(
     val hostTeam: CompetitionTeam,
     val guestTeam: CompetitionTeam,
     val status: MatchStatus,
+    val sets: Set<MatchSet>
 )
 

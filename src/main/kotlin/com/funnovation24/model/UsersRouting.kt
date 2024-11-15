@@ -10,7 +10,7 @@ fun Routing.usersRouting() {
     post("/users") {
         val user = call.receive<ExposedUser>()
         withUserService {
-            val id = userService.create(user)
+            val id = databaseSchema.create(user)
             call.respond(HttpStatusCode.Created, id)
         }
     }
@@ -19,7 +19,7 @@ fun Routing.usersRouting() {
     get("/users/{id}") {
         val id = call.parameters["id"]?.toInt() ?: throw IllegalArgumentException("Invalid ID")
         withUserService {
-            val user = userService.read(id)
+            val user = databaseSchema.read(id)
             if (user != null) {
                 call.respond(HttpStatusCode.OK, user)
             } else {
@@ -33,7 +33,7 @@ fun Routing.usersRouting() {
         val id = call.parameters["id"]?.toInt() ?: throw IllegalArgumentException("Invalid ID")
         val user = call.receive<ExposedUser>()
         withUserService {
-            userService.update(id, user)
+            databaseSchema.update(id, user)
             call.respond(HttpStatusCode.OK)
         }
     }
@@ -42,7 +42,7 @@ fun Routing.usersRouting() {
     delete("/users/{id}") {
         val id = call.parameters["id"]?.toInt() ?: throw IllegalArgumentException("Invalid ID")
         withUserService {
-            userService.delete(id)
+            databaseSchema.delete(id)
             call.respond(HttpStatusCode.OK)
         }
     }
