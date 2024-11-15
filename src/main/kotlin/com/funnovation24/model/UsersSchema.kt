@@ -1,5 +1,6 @@
-package com.funnovation24.database
+package com.funnovation24.model
 
+import com.funnovation24.plugins.withDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.serialization.Serializable
 import org.jetbrains.exposed.sql.*
@@ -59,3 +60,10 @@ class UserService(database: Database) {
         newSuspendedTransaction(Dispatchers.IO) { block() }
 }
 
+class UserServiceContext(val database: Database, val userService: UserService)
+
+inline fun <T : Any> withUserService(body: UserServiceContext.() -> T): T {
+    withDatabase {
+        return body(UserServiceContext(database = database, UserService(database)))
+    }
+}

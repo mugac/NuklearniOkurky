@@ -1,54 +1,35 @@
 package com.funnovation24.plugins
 
-import com.funnovation24.database.ExposedUser
-import com.funnovation24.database.UserService
-import io.ktor.http.*
 import io.ktor.server.application.*
-import io.ktor.server.request.*
-import io.ktor.server.response.*
-import io.ktor.server.routing.*
 import org.jetbrains.exposed.sql.Database
 
-fun Application.configureDatabases() {
-    val database = Database.connect(
-        url = "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1",
-        user = "root",
-        driver = "org.h2.Driver",
-        password = "",
-    )
-    val userService = UserService(database)
-    routing {
-        // Create user
-        post("/users") {
-            val user = call.receive<ExposedUser>()
-            val id = userService.create(user)
-            call.respond(HttpStatusCode.Created, id)
-        }
+@PublishedApi
+internal lateinit var database: Database;
 
-        // Read user
-        get("/users/{id}") {
-            val id = call.parameters["id"]?.toInt() ?: throw IllegalArgumentException("Invalid ID")
-            val user = userService.read(id)
-            if (user != null) {
-                call.respond(HttpStatusCode.OK, user)
-            } else {
-                call.respond(HttpStatusCode.NotFound)
-            }
-        }
+class DatabaseContext(val database: Database)
 
-        // Update user
-        put("/users/{id}") {
-            val id = call.parameters["id"]?.toInt() ?: throw IllegalArgumentException("Invalid ID")
-            val user = call.receive<ExposedUser>()
-            userService.update(id, user)
-            call.respond(HttpStatusCode.OK)
-        }
-
-        // Delete user
-        delete("/users/{id}") {
-            val id = call.parameters["id"]?.toInt() ?: throw IllegalArgumentException("Invalid ID")
-            userService.delete(id)
-            call.respond(HttpStatusCode.OK)
-        }
-    }
+inline fun <T : Any> withDatabase(body: DatabaseContext.() -> T): T {
+    return body(DatabaseContext(database = database))
 }
+
+fun Application.configureDatabases() {
+    database = connectToMariaDb()
+}
+
+fun Application.connectToMariaDb(): Database {
+    val user = System.getenv("DB_USER")
+    val password = System.getenv("DB_PASSWORD")
+    val host = System.getenv("DB_HOST") ?: "127.0.0.1"
+    val port = System.getenv("DB_PORT") ?: "3306"
+    val dbName = System.getenv("DB_NAME") ?: "nuklearni_okurky"
+
+    //  jdbc:mariadb://HOST:PORT/DBNAME
+    val connection = Database.connect(
+        url = "jdbc:mariadb://$host:$port/$dbName",
+        user = user ?: "root",
+        password = password ?: "",
+    )
+
+    return connection
+}
+

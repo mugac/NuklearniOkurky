@@ -1,16 +1,14 @@
 package com.funnovation24.plugins
 
+import com.funnovation24.model.usersRouting
 import io.ktor.http.*
-import io.ktor.resources.*
 import io.ktor.server.application.*
 import io.ktor.server.http.content.*
 import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.request.*
 import io.ktor.server.resources.*
-import io.ktor.server.resources.Resources
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import kotlinx.serialization.Serializable
 import java.io.File
 
 fun Application.configureRouting() {
@@ -25,16 +23,12 @@ fun Application.configureRouting() {
     }
     routing {
         staticResources("/", "static")
-        get("/api/{...}") {
-            call.respondText("Hello from ${call.request.uri}")
-        }
-        get<Articles> { article ->
-            // Get all articles ...
-            call.respond("List of articles sorted starting from ${article.sort}")
+        route("/api") {
+            usersRouting()
+            get("{...}") {
+                call.respondText("Hello from ${call.request.uri}")
+            }
         }
     }
 }
 
-@Serializable
-@Resource("/articles")
-class Articles(val sort: String? = "new")
