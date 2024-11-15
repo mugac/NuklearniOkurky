@@ -1,19 +1,18 @@
-val ktor_version: String by project
+val h2_version: String by project
 val kotlin_version: String by project
 val logback_version: String by project
-val mongo_version: String by project
 
 plugins {
-    kotlin("jvm") version "2.0.0"
-    id("io.ktor.plugin") version "2.3.11"
-    kotlin("plugin.serialization") version "2.0.0"
+    kotlin("jvm") version "2.0.21"
+    id("io.ktor.plugin") version "3.0.1"
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.0.21"
 }
 
-group = "com.example"
+group = "com.funnovation24"
 version = "0.0.1"
 
 application {
-    mainClass.set("com.example.ApplicationKt")
+    mainClass.set("io.ktor.server.netty.EngineMain")
 
     val isDevelopment: Boolean = project.ext.has("development")
     applicationDefaultJvmArgs = listOf("-Dio.ktor.development=$isDevelopment")
@@ -21,21 +20,40 @@ application {
 
 repositories {
     mavenCentral()
+    maven { url = uri("https://jitpack.io") }
+    maven { url = uri("https://packages.confluent.io/maven/") }
 }
 
 dependencies {
     implementation("io.ktor:ktor-server-core-jvm")
+    implementation("io.ktor:ktor-server-auth-jvm")
+    implementation("io.ktor:ktor-server-auth-jwt-jvm")
+    implementation("io.ktor:ktor-client-core-jvm")
+    implementation("io.ktor:ktor-client-apache-jvm")
+    implementation("io.ktor:ktor-server-csrf-jvm")
+    implementation("io.ktor:ktor-server-sessions-jvm")
+    implementation("io.ktor:ktor-server-resources-jvm")
+    implementation("io.ktor:ktor-server-host-common-jvm")
+    implementation("io.ktor:ktor-server-status-pages-jvm")
+    implementation("io.ktor:ktor-server-compression-jvm")
+    implementation("io.ktor:ktor-server-cors-jvm")
+    implementation("io.ktor:ktor-server-default-headers-jvm")
+    implementation("io.ktor:ktor-server-swagger-jvm")
+//    implementation("io.ktor:ktor-server-openapi")
+    implementation("io.ktor:ktor-server-call-logging-jvm")
+    implementation("dev.hayden:khealth:3.0.0")
+    implementation("io.ktor:ktor-server-call-id-jvm")
+    implementation("io.ktor:ktor-server-content-negotiation-jvm")
+    implementation("io.ktor:ktor-serialization-kotlinx-json-jvm")
+    implementation("org.jetbrains.exposed:exposed-core:0.53.0")
+    implementation("org.jetbrains.exposed:exposed-jdbc:0.53.0")
+    implementation("com.h2database:h2:$h2_version")
+    implementation("io.ktor:ktor-server-websockets-jvm")
+    implementation("io.github.flaxoos:ktor-server-rate-limiting-jvm:2.1.1")
     implementation("io.ktor:ktor-server-netty-jvm")
     implementation("ch.qos.logback:logback-classic:$logback_version")
-    implementation("io.ktor:ktor-server-content-negotiation:$ktor_version")
-    implementation("io.ktor:ktor-serialization-kotlinx-json:$ktor_version")
-    implementation("io.ktor:ktor-client-core:$ktor_version")
-    implementation("io.ktor:ktor-client-cio:$ktor_version")
-    implementation("io.ktor:ktor-client-content-negotiation:$ktor_version")
-    implementation("io.ktor:ktor-server-call-logging:$ktor_version")
-    implementation("org.mongodb:mongodb-driver-kotlin-coroutine:$mongo_version")
-    implementation("org.mongodb:bson-kotlinx:$mongo_version")
-    implementation("commons-net:commons-net:3.9.0")
-    testImplementation("io.ktor:ktor-server-tests-jvm")
+    implementation("io.ktor:ktor-server-config-yaml")
+    testImplementation("io.ktor:ktor-server-test-host-jvm")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }
+

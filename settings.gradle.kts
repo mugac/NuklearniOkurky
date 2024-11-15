@@ -1,1 +1,1 @@
-rootProject.name = "example-ktor"
+rootProject.name = "nuklearni-okurky"
