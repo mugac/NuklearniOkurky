@@ -23,9 +23,9 @@ fun Application.configureRouting() {
         exception<Throwable> { call, cause ->
             call.respondText(text = "500: $cause", status = HttpStatusCode.InternalServerError)
         }
-        status(HttpStatusCode.NotFound) { call, status ->
-            call.respondFile(staticResourceFolder, "${status.value}.html")
-        }
+//        status(HttpStatusCode.NotFound) { call, status ->
+//            call.respondFile(staticResourceFolder, "${status.value}.html")
+//        }
     }
     routing {
         route("/api") {
@@ -34,7 +34,8 @@ fun Application.configureRouting() {
                 call.respondText("Hello from ${call.request.uri}")
             }
         }
-        staticResources("/", "static")
+        staticResources("vite.svg", "static", "vite.svg")
+        staticResources("/assets", "static/assets")
         get("{...}") {
             call.respondFile(staticResourceFolder, "index.html")
         }
