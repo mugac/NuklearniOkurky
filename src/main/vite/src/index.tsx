@@ -1,9 +1,9 @@
-import "./style.css";
+import "./styles";
 
-import { hydrate } from "preact";
+import {hydrate} from "preact";
 import render from "preact-render-to-string/jsx";
 
-import { App } from "./app";
+import {App} from "./app";
 
 if (typeof window !== "undefined") {
     hydrate(<App />, document.querySelector("#app")!);
