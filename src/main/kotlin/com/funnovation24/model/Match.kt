@@ -11,9 +11,3 @@ data class Match(
     val status: MatchStatus,
 )
 
-enum class MatchStatus {
-    FUTURE,
-    LIVE,
-    PROSPECT,
-    FINISHED
-}
