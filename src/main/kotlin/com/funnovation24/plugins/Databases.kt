@@ -1,9 +1,7 @@
 package com.funnovation24.plugins
 
 import io.ktor.server.application.*
-import kotlinx.coroutines.Dispatchers
-import org.jetbrains.exposed.sql.Database
-import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
+import org.ktorm.database.Database
 
 @PublishedApi
 internal lateinit var database: Database;
@@ -13,9 +11,6 @@ class DatabaseContext(val database: Database)
 inline fun <T : Any> withDatabase(body: DatabaseContext.() -> T): T {
     return body(DatabaseContext(database = database))
 }
-
-suspend fun <T> dbQuery(block: suspend () -> T): T =
-    newSuspendedTransaction(Dispatchers.IO) { block() }
 
 fun Application.configureDatabases() {
     database = connectToMariaDb()

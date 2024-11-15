@@ -1,14 +1,16 @@
 package com.funnovation24.model
 
-import kotlinx.serialization.Serializable
+import org.ktorm.entity.Entity
 
-@Serializable
-data class User(
-    val id: Int,
-    val team: Team,
-    val name: String,
-    val username: String,
-    val email: String?,
-    val passwordHash: String?,
-    val superAdmin: Boolean,
-)
+interface User : Entity<User> {
+    companion object : Entity.Factory<User>()
+
+    val id: Int;
+    val teamId: Int;
+    val team: Team;
+    val name: String;
+    val username: String;
+    val email: String?;
+    val passwordHash: String?;
+    val superAdmin: Boolean;
+}

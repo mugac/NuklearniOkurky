@@ -1,12 +1,13 @@
 package com.funnovation24.model
 
-import kotlinx.serialization.Serializable
+import org.ktorm.entity.Entity
 
-@Serializable
-data class MatchSet(
-    val id: Int,
-    val match: Match,
-    val hostScore: Int,
-    val guestScore: Int,
-)
+interface MatchSet : Entity<MatchSet> {
+    companion object : Entity.Factory<MatchSet>()
 
+    val id: Int;
+    val matchId: Int;
+    val match: Match;
+    val hostScore: Int;
+    val guestScore: Int;
+}

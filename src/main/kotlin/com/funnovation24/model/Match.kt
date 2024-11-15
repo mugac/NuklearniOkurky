@@ -1,14 +1,21 @@
 package com.funnovation24.model
 
-import kotlinx.serialization.Serializable
+import org.ktorm.entity.Entity
 
-@Serializable
-data class Match(
-    val id: Int,
-    val competition: Competition,
-    val hostTeam: CompetitionTeam,
-    val guestTeam: CompetitionTeam,
-    val status: MatchStatus,
-    val sets: Set<MatchSet>
-)
+interface Match : Entity<Match> {
+    companion object : Entity.Factory<Match>()
+
+    val id: Int;
+    val hostTeamId: Int
+    val hostTeam: Team;
+    val guestTeamId: Int
+    val guestTeam: Team;
+    var status: MatchStatus;
+    var statusString: String
+        get() = status.name
+        set(value) {
+            status = MatchStatus.valueOf(value)
+        }
+    val sets: Set<MatchSet>;
+}
 
