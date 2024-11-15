@@ -3,6 +3,8 @@ import Home from "./Home";
 import Login from "./Login";
 import Register from "./Register";
 import TableTerms from "./TableTerms";
+import CreateTeam from "./CreateTeam";
+import Team from "./Team";
 import Router from "preact-router";
 import Layout from "./Layout";
 
@@ -14,6 +16,8 @@ export const App: FunctionalComponent = () => {
                 <Login path="/login"/>
                 <Register path="/register"/>
                 <TableTerms path="/table-terms"/>
+                <Team path="/team"/>
+                <CreateTeam path="/create-team"/>
 
                 {/* <AsyncRoute
                     path="/friends"

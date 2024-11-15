@@ -93,7 +93,7 @@ const TableTerms: FunctionComponent = () => {
                     }
                 `}
             </style>
-            <div class="bg-gray-100 p-8 rounded-lg shadow-lg max-w-md w-1/2">
+            <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-1/2">
                 <h1 class="text-2xl font-bold mb-4 text-center">Tabulka termínu</h1>
                 <div class="flex justify-between mb-4">
                     <button onClick={handlePreviousWeek} class="bg-blue-500 text-white p-2 rounded shadow-md hover:bg-blue-600">Předchozí týden</button>
