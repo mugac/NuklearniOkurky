@@ -17,16 +17,17 @@ fun Application.configureDatabases() {
 }
 
 fun Application.connectToMariaDb(): Database {
-    val user = System.getenv("DB_USER")
-    val password = System.getenv("DB_PASSWORD")
-    val host = System.getenv("DB_HOST") ?: "127.0.0.1"
+    val user = System.getenv("DB_USER") ?: "nuklearniuser"
+    val password = System.getenv("DB_PASSWORD") ?: "P7x5kMScw"
+    val host = System.getenv("DB_HOST") ?: "10.128.40.90"
     val port = System.getenv("DB_PORT") ?: "3306"
     val dbName = System.getenv("DB_NAME") ?: "nuklearni_okurky"
 
     //  jdbc:mariadb://HOST:PORT/DBNAME
     val connection = Database.connect(
         url = "jdbc:mariadb://$host:$port/$dbName",
-        user = user ?: "root",
+        driver = "org.mariadb.jdbc.Driver",
+        user = user,
         password = password ?: "",
     )
 

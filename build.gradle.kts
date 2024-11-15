@@ -46,7 +46,7 @@ dependencies {
     implementation("io.ktor:ktor-server-content-negotiation-jvm")
     implementation("io.ktor:ktor-serialization-kotlinx-json-jvm")
     implementation("org.ktorm:ktorm-core:4.1.1")
-    implementation("com.h2database:h2:$h2_version")
+    implementation("org.mariadb.jdbc:mariadb-java-client:3.5.0")
     implementation("io.ktor:ktor-server-websockets-jvm")
     implementation("io.github.flaxoos:ktor-server-rate-limiting-jvm:2.1.1")
     implementation("io.ktor:ktor-server-netty-jvm")
