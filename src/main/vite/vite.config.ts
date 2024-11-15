@@ -14,6 +14,12 @@ export default defineConfig({
   ],
   build: {
     emptyOutDir: true,
-    outDir: "../resources/static"
+    outDir: "../resources/static",
+    rollupOptions: {
+      input: [
+        "index.html",
+        "404.html"
+      ]
+    }
   }
 })

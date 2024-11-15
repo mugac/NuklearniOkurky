@@ -21,7 +21,6 @@ fun Application.configureRouting() {
         }
         status(HttpStatusCode.NotFound) { call, status ->
             call.respondFile(File(javaClass.classLoader.getResource("static/404.html")!!.file))
-            call.respondText(text = "404: Page Not Found", status = status)
         }
     }
     routing {
