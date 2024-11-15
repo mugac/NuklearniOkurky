@@ -1,18 +1,13 @@
 package com.funnovation24.model
 
+import com.funnovation24.plugins.dbQuery
 import com.funnovation24.plugins.withDatabase
-import kotlinx.coroutines.Dispatchers
-import kotlinx.serialization.Serializable
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 import org.jetbrains.exposed.sql.transactions.transaction
 
-@Serializable
-data class ExposedUser(val name: String, val age: Int)
-
 class UserService(database: Database) {
-    object Users : Table() {
+    object Users : Table(name = "uzivatel") {
         val id = integer("id").autoIncrement()
         val name = varchar("name", length = 50)
         val age = integer("age")
@@ -35,7 +30,8 @@ class UserService(database: Database) {
 
     suspend fun read(id: Int): ExposedUser? {
         return dbQuery {
-            Users.select { Users.id eq id }
+            Users.selectAll()
+                .where { Users.id eq id }
                 .map { ExposedUser(it[Users.name], it[Users.age]) }
                 .singleOrNull()
         }
@@ -55,9 +51,6 @@ class UserService(database: Database) {
             Users.deleteWhere { Users.id.eq(id) }
         }
     }
-
-    private suspend fun <T> dbQuery(block: suspend () -> T): T =
-        newSuspendedTransaction(Dispatchers.IO) { block() }
 }
 
 class UserServiceContext(val database: Database, val userService: UserService)

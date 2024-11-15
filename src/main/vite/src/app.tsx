@@ -1,9 +1,20 @@
-import { FunctionalComponent } from "preact";
+import {FunctionalComponent} from "preact";
+import Home from "./Home";
+import Router from "preact-router";
 
 export const App: FunctionalComponent = () => {
     return (
-        <div class="flex flex-col grow m-2 md:m-4">
-            <h1>Example Vite App</h1>
-        </div>
+        <Router>
+            <Home path="/"/>
+            {/* <AsyncRoute
+                path="/friends"
+                getComponent={() => import('./friends').then(module => module.default)}
+            />
+            <AsyncRoute
+                path="/friends/:id"
+                getComponent={() => import('./friend').then(module => module.default)}
+                loading={() => <div>loading...</div>}
+            /> */}
+        </Router>
     );
 };
