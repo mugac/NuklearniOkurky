@@ -1,4 +1,4 @@
-package com.funnovation24.model
+package com.funnovation24.database.model
 
 enum class MatchStatus {
     FUTURE,

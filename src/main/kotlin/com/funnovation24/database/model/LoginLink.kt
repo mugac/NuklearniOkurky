@@ -1,4 +1,4 @@
-package com.funnovation24.model
+package com.funnovation24.database.model
 
 import kotlinx.serialization.Serializable
 import org.ktorm.entity.Entity
@@ -9,5 +9,4 @@ sealed interface LoginLink : Entity<LoginLink> {
 
     var token: String;
     var userId: Int;
-    val user: User;
 }

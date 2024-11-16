@@ -1,6 +1,6 @@
-package com.funnovation24.model.schema
+package com.funnovation24.database.schema
 
-import com.funnovation24.model.TeamAdmin
+import com.funnovation24.database.model.TeamAdmin
 import org.ktorm.database.Database
 import org.ktorm.entity.sequenceOf
 import org.ktorm.schema.Table

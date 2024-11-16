@@ -16,11 +16,13 @@ fun Application.configureHTTP() {
         allowMethod(HttpMethod.Delete)
         allowMethod(HttpMethod.Patch)
         allowHeader(HttpHeaders.Authorization)
-        allowHeader("MyCustomHeader")
-        anyHost() // @TODO: Don't do this in production if possible. Try to limit it.
+        exposeHeader(HttpHeaders.AccessControlAllowOrigin)
+        anyHost()
     }
     install(DefaultHeaders) {
         header("X-Engine", "Ktor") // will send this header with each response
+        header("Access-Control-Allow-Origin", "*")
+        header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE, HEAD, OPTIONS")
     }
     routing {
         swaggerUI(path = "openapi")

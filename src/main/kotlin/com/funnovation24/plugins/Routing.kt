@@ -1,6 +1,7 @@
 package com.funnovation24.plugins
 
-import com.funnovation24.model.usersRouting
+import com.funnovation24.controllers.registerRouting
+import com.funnovation24.controllers.usersRouting
 import com.funnovation24.security.UnautorizedException
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -20,6 +21,12 @@ fun Application.configureRouting() {
 
     install(Resources)
     install(StatusPages) {
+        exception<NoSuchElementException> { call, cause ->
+            call.respond(HttpStatusCode.NotFound)
+        }
+        exception<IllegalArgumentException> { call, cause ->
+            call.respond(HttpStatusCode.BadRequest, cause.message ?: "")
+        }
         exception<UnautorizedException> { call, cause ->
             call.respond(HttpStatusCode.Unauthorized, cause.message ?: "")
         }
@@ -33,6 +40,7 @@ fun Application.configureRouting() {
     }
     routing {
         route("/api") {
+            registerRouting()
             usersRouting()
             get("{...}") {
                 call.respondText("Hello from ${call.request.uri}")
