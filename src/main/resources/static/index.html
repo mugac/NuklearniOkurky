@@ -8,13 +8,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Example App</title>
     <script type="module" crossorigin src="/assets/modulepreload-polyfill-B5Qt9EMX.js"></script>
-    <script type="module" crossorigin src="/assets/index-C_3p2_kh.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/style-CiJ6iK0r.css">
+    <script type="module" crossorigin src="/assets/index-DdmwxFue.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/style-CPinDRfd.css">
 </head>
 <body>
 <div id="app" class="flex flex-col h-screen w-screen sm:items-center mx-auto">
-    <div class="flex flex-col grow m-2 md:m-4">
-        <h1>Example Vite App</h1>
+    <div class="flex flex-col w-screen h-screen bg-gray-100">
+        <nav class=" bg-blue-500 p-4 shadow-md">
+            <div class="container mx-auto flex justify-between items-center">
+                <a href="/"
+                   class="text-white text-xl font-bold"
+                >
+                    Competition Site
+                </a>
+                <div>
+                    <a href="/team"
+                       class="text-white mr-4 hover:underline"
+                    >
+                        Tým
+                    </a>
+                    <a href="/table-terms"
+                       class="text-white mr-4 hover:underline"
+                    >
+                        Tabulka termínu
+                    </a>
+                </div>
+            </div>
+        </nav>
+        <div class="flex flex-col items-center justify-center flex-grow">
+            <div class="text-center p-8 bg-white rounded-lg shadow-lg max-w-2xl">
+                <h2 class="text-4xl font-bold mb-6">Vítám tě na portále volejbalové soutěže</h2>
+                <p class="text-lg mb-6">
+                    Pokud jsi už zaregistrovaný v teamu, prosím přihlaš se. Pokud ještě nemáš účet, kontakuj svého
+                    trenéra.
+                </p>
+                <a href="/login"
+                   class="bg-blue-500 text-white p-4 rounded shadow-md hover:bg-blue-600"
+                >
+                    Přejít na přihlášní
+                </a>
+            </div>
+        </div>
     </div>
 
 </div>

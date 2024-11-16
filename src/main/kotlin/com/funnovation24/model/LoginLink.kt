@@ -1,11 +1,13 @@
 package com.funnovation24.model
 
+import kotlinx.serialization.Serializable
 import org.ktorm.entity.Entity
 
-interface LoginLink : Entity<LoginLink> {
+@Serializable
+sealed interface LoginLink : Entity<LoginLink> {
     companion object : Entity.Factory<LoginLink>()
 
-    val token: String;
-    val userId: Int;
+    var token: String;
+    var userId: Int;
     val user: User;
 }

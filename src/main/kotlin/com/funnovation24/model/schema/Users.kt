@@ -13,8 +13,8 @@ object Users : Table<User>("user") {
     val teamId = int("team_id").bindTo { it.teamId }
     val name = varchar("name").bindTo { it.name }
     val username = varchar("username").bindTo { it.username }
-    val email = varchar("varchar").bindTo { it.email }
-    val passwordHash = varchar("varchar").bindTo { it.passwordHash }
+    val email = varchar("email").bindTo { it.email }
+    val passwordHash = varchar("password_hash").bindTo { it.passwordHash }
     val superAdmin = boolean("super_admin").bindTo { it.superAdmin }
 }
 

@@ -9,7 +9,9 @@
     </root>
     <logger name="org.eclipse.jetty" level="INFO"/>
     <logger name="io.netty" level="INFO"/>
-    <logger name="io.ktor.routing.Routing" level="INFO"/>
+    <logger name="io.ktor.server.routing.Routing" level="INFO"/>
+    <logger name="org.mariadb.jdbc.client.socket.impl" level="INFO"/>
+    <logger name="org.mariadb.jdbc.message.server" level="WARN"/>
     <logger name="io.ktor.server.plugins" level="INFO"/>
     <logger name="io.ktor.client.plugins" level="INFO"/>
 </configuration>

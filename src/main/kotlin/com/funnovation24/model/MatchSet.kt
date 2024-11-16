@@ -1,8 +1,10 @@
 package com.funnovation24.model
 
+import kotlinx.serialization.Serializable
 import org.ktorm.entity.Entity
 
-interface MatchSet : Entity<MatchSet> {
+@Serializable
+sealed interface MatchSet : Entity<MatchSet> {
     companion object : Entity.Factory<MatchSet>()
 
     val id: Int;

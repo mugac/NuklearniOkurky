@@ -10,7 +10,10 @@ import io.ktor.server.request.*
 import io.ktor.server.resources.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import org.apache.commons.logging.LogFactory
 import java.io.File
+
+val errorLog = LogFactory.getLog("Error");
 
 fun Application.configureRouting() {
     val staticResourceFolder = File(javaClass.classLoader.getResource("static")!!.file)
@@ -21,6 +24,7 @@ fun Application.configureRouting() {
             call.respond(HttpStatusCode.Unauthorized, cause.message ?: "")
         }
         exception<Throwable> { call, cause ->
+            errorLog.error("Internal Server Error", cause);
             call.respondText(text = "500: $cause", status = HttpStatusCode.InternalServerError)
         }
 //        status(HttpStatusCode.NotFound) { call, status ->

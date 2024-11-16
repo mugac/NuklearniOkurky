@@ -1,8 +1,10 @@
 package com.funnovation24.model
 
+import kotlinx.serialization.Serializable
 import org.ktorm.entity.Entity
 
-interface Match : Entity<Match> {
+@Serializable
+sealed interface Match : Entity<Match> {
     companion object : Entity.Factory<Match>()
 
     val id: Int;
@@ -10,12 +12,13 @@ interface Match : Entity<Match> {
     val hostTeam: Team;
     val guestTeamId: Int
     val guestTeam: Team;
-    var status: MatchStatus;
-    var statusString: String
-        get() = status.name
+    var statusString: String;
+    var status: MatchStatus
+        get() = MatchStatus.valueOf(statusString)
         set(value) {
-            status = MatchStatus.valueOf(value)
+            statusString = value.name
         }
+
     val sets: Set<MatchSet>;
 }
 

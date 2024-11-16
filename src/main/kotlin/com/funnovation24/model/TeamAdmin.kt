@@ -1,8 +1,10 @@
 package com.funnovation24.model
 
+import kotlinx.serialization.Serializable
 import org.ktorm.entity.Entity
 
-interface TeamAdmin : Entity<TeamAdmin> {
+@Serializable
+sealed interface TeamAdmin : Entity<TeamAdmin> {
     companion object : Entity.Factory<TeamAdmin>()
 
     val teamId: Int;

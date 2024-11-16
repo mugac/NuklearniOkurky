@@ -1,11 +1,13 @@
 package com.funnovation24.model
 
+import kotlinx.serialization.Serializable
 import org.ktorm.entity.Entity
 
-interface Team : Entity<Team> {
+@Serializable
+sealed interface Team : Entity<Team> {
     companion object : Entity.Factory<Team>()
 
     val id: Int
-    val name: String
+    var name: String
     val admins: Set<User>
 }
