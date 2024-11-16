@@ -1,5 +1,5 @@
-import { FunctionComponent } from "preact";
-import axios, { formToJSON } from "axios";
+import {FunctionComponent} from "preact";
+import axios from "axios";
 
 // Vytvářet token pro registraci, může jen admin teamu
 
@@ -23,7 +23,7 @@ const Team: FunctionComponent = () => {
     const createRegisterLink = async () => {
         var name: string | null = window.prompt("Zadej jméno uživatele");
 
-        axios.post("https://2a75-77-236-217-102.ngrok-free.app/api/create-login-link", {
+        axios.post("/api/create-login-link", {
             name: name
         }).then((response) => {
             console.log(response);

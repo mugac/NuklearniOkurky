@@ -63,10 +63,9 @@ fun Route.registerRouting() {
                 userId = user.id
             }
             database.loginLinks.add(loginLink)
+            log.debug(loginLink.toString())
+            call.respond(loginLink)
         }
-
-        log.debug(loginLink.toString())
-        call.respond(mapOf("name" to "test"))
     }
 }
 
