@@ -1,0 +1,8 @@
+version: '2'
+services:
+  nuklearni-okurky:
+    image: nuklearni-okurky:latest
+    ports:
+      - "80:8080"
+    container_name: nuklearni-okurky
+    restart: always

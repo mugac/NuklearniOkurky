@@ -16,7 +16,7 @@ RUN gradle clean build --no-daemon
 FROM openjdk:21-jdk
 
 # Copy the jar to the production image from the builder stage.
-COPY --from=builder /home/gradle/build/libs/example-ktor-all.jar /example-ktor.jar
+COPY --from=builder /home/gradle/build/libs/nuklearni-okurky-all.jar /nuklearni-okurky.jar
 
 # Run the web service on container startup.
-CMD [ "java", "-jar", "-Djava.security.egd=file:/dev/./urandom", "/example-ktor.jar" ]
+CMD [ "java", "-jar", "-Djava.security.egd=file:/dev/./urandom", "/nuklearni-okurky.jar" ]
